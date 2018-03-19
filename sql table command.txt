@@ -1,0 +1,51 @@
+
+create table categories(
+	name varchar(255));
+
+create table itemstates(
+	name varchar(255));
+
+insert into itemstates VALUES ("pending"),("active"),("sold"),("denied"));
+
+
+create table people(
+	username varchar(255),
+	email varchar(255),
+	password varchar(255),
+	isadmin varchar(255));
+
+
+
+alter table people add primary key(username);
+
+
+create table rating(
+	rating int,
+	name varchar(255),
+	foreign key(name) REFERENCES people(username));
+
+
+alter table people add primary key(username);
+
+alter table itemstates add primary key(name);
+
+
+create table items(
+	id int,
+        title varchar(255),
+        description varchar(255),
+        imagepath varchar(255),
+        category varchar(255),
+        price int,
+        state varchar(255),
+        dateposted date,
+        seller varchar(255),
+        buyer varchar(255),
+        foreign key(category) REFERENCES categories(name);	
+        foreign key(state) REFERENCES itemstates(name);
+        foreign key(seller) REFERENCES people(username);
+        foreign key(buyer) REFERENCES people(username));
+
+
+
+
