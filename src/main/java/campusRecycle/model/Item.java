@@ -17,8 +17,8 @@ public class Item {
 
     private double price;
 
-    // Enum TODO
-//    private ItemState state;
+    @Enumerated(EnumType.STRING)
+    private ItemState state;
 
     @ManyToOne(optional = false)
     @JoinColumn(referencedColumnName = "name")
@@ -85,5 +85,13 @@ public class Item {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public ItemState getState() {
+        return state;
+    }
+
+    public void setState(ItemState state) {
+        this.state = state;
     }
 }
