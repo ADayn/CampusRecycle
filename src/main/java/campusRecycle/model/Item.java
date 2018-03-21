@@ -17,6 +17,8 @@ public class Item {
 
     private double price;
 
+    private String category;
+
     @Enumerated(EnumType.STRING)
     private ItemState state;
 
@@ -93,5 +95,14 @@ public class Item {
 
     public void setState(ItemState state) {
         this.state = state;
+    }
+
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

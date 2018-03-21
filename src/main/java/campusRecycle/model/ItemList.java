@@ -58,6 +58,7 @@ public class ItemList {
 			if(item.getId() == id)
 				return item;
 		}
+		return null;
 	}
 	
 	public boolean addItem(Item item) {

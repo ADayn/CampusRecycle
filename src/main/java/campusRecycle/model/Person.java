@@ -1,4 +1,6 @@
-package ooad;
+package campusRecycle.model;
+
+import campusRecycle.model.Item;
 
 import java.awt.event.ItemEvent;
 import java.util.List;
