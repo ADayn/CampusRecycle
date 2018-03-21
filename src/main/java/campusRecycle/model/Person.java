@@ -16,32 +16,3 @@ public class Person {
 	}
 }
 
-class User extends Person{
-	List<Integer> ratings;
-	 
-	public void addRating(int rate) {
-		
-	}
-	
-	public int calcAverageRating() {
-		return 0;
-	}
-}
-
-class Admin extends Person{
-	User user;
-	Item it;
-	
-	public void sendApprovalEmail(User user,Item it) {
-		
-	}
-	
-	public void sendDenialEmail(User user,Item it) {
-		
-	}
-	
-	public void sendUserDeletionEmail(User user) {
-		
-	}
-}
-
