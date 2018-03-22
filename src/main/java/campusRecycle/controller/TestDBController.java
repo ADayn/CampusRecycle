@@ -23,7 +23,7 @@ public class TestDBController {
         // @RequestParam means it is a parameter from the GET or POST request
 
         User n = new User();
-        n.setName(name);
+//        n.setName(name);
         userRepository.save(n);
         return "Saved";
     }
