@@ -14,6 +14,12 @@ public class Inventory {
         this.itemRepository = itemRepository;
     }
 
+    public ItemList getListByState(ItemState state) {
+        return new ItemList(itemRepository.getByState(state));
+    }
 
+    public ItemList getListByStateAndCategory(ItemState state, String category) {
+        return new ItemList(itemRepository.getByStateAndCategory(state, category));
+    }
 
 }
