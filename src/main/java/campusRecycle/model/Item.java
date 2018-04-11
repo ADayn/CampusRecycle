@@ -1,6 +1,7 @@
 package campusRecycle.model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity // This tells Hibernate to make a table out of this class
 public class Item {
@@ -9,17 +10,21 @@ public class Item {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
 
+    @Column(nullable = false)
     private String title;
 
     private String description;
 
     private String imagePath;
 
+    @Column(nullable = false)
     private double price;
 
+    @Column(nullable = false)
     private String category;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private ItemState state;
 
     @ManyToOne(optional = false)
@@ -29,6 +34,10 @@ public class Item {
     @ManyToOne
     @JoinColumn(name="buyer_id", referencedColumnName = "id")
     private User buyer;
+
+    @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date datePosted;
 
     /////////////////////////////////////////////////////////////
 
@@ -104,5 +113,13 @@ public class Item {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public Date getDatePosted() {
+        return datePosted;
+    }
+
+    public void setDatePosted(Date datePosted) {
+        this.datePosted = datePosted;
     }
 }
