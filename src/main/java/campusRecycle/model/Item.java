@@ -20,8 +20,9 @@ public class Item {
     @Column(nullable = false)
     private double price;
 
-    @Column(nullable = false)
-    private String category;
+    @ManyToOne(optional = false)
+    @JoinColumn(name="category_id", referencedColumnName = "id")
+    private Category category;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -107,11 +108,11 @@ public class Item {
     }
 
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
