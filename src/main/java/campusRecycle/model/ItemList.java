@@ -1,9 +1,14 @@
 package campusRecycle.model;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ItemList {
 	private List<Item> items;
-	
+
+	public ItemList(List<Item> items) {
+		this.items = items;
+	}
+
 	public List<Item> getSorted(SortKey key){
 		Comparator<Item> comparator=new ItemPriceComparator();
 		List<Item> sortedItems = new ArrayList<Item>(items);
@@ -17,10 +22,11 @@ public class ItemList {
 	//a simple version, just match keywords with (
 	public List<Item> search(String keyword){
 		List<Item> foundItems = new LinkedList<Item>();
-		for (Item item: items) {
-			
-		}
-		return foundItems;
+		// TODO: Sort better (multiple key words)
+		return foundItems
+				.stream()
+				.filter(item -> item.getTitle().contains(keyword) || item.getDescription().contains(keyword))
+				.collect(Collectors.toList());
 	}
 	
 	public List<Item> getByCategory(String cat){
