@@ -23,9 +23,21 @@ public class TestDBController {
         // @RequestParam means it is a parameter from the GET or POST request
 
         User n = new User();
-//        n.setName(name);
+        n.setUsername(name);
+        n.setEmail(email);
         userRepository.save(n);
         return "Saved";
+    }
+    
+    @GetMapping(path="/addrating")
+    public @ResponseBody String addRating(@RequestParam String email, @RequestParam int rating) {
+    	System.out.println("email="+email+"; rating="+Integer.toString(rating));
+    	User n = userRepository.findByEmail(email);
+    	//System.out.println(n.getUsername());
+    	n.addRating(rating);
+    	userRepository.save(n);
+    	System.out.println(n.calcAverageRating());
+    	return "Rating Added";
     }
 
     @GetMapping(path="/all")

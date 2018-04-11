@@ -4,9 +4,15 @@ import campusRecycle.model.Item;
 
 import java.awt.event.ItemEvent;
 import java.util.List;
+import javax.persistence.*;
 
-public class Person {
 
+@MappedSuperclass
+public abstract class Person {
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+    private Integer id;
 	String email;
 	char[] password;
 	String username;

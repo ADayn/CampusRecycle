@@ -23,11 +23,11 @@ public class Item {
     private ItemState state;
 
     @ManyToOne(optional = false)
-    @JoinColumn(referencedColumnName = "name")
+    @JoinColumn(name="seller_id", referencedColumnName = "id")
     private User seller;
 
     @ManyToOne
-    @JoinColumn(referencedColumnName = "name")
+    @JoinColumn(name="buyer_id", referencedColumnName = "id")
     private User buyer;
 
     /////////////////////////////////////////////////////////////

@@ -5,9 +5,13 @@ import campusRecycle.model.Item;
 import java.awt.event.ItemEvent;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Admins")
 public class Admin extends Person{
-	User user;
-	Item it;
+	
 	
 	public void sendApprovalEmail(User user,Item it) {
 		
