@@ -2,7 +2,7 @@ package campusRecycle.model;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class ItemList {
+public class ItemList implements Iterable<Item> {
 	private List<Item> items;
 
 	public ItemList(List<Item> items) {
@@ -70,5 +70,10 @@ public class ItemList {
 	public boolean addItem(Item item) {
 		items.add(item);
 		return true;
+	}
+
+	@Override
+	public Iterator<Item> iterator() {
+		return items.iterator();
 	}
 }
