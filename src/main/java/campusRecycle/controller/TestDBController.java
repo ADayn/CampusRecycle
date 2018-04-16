@@ -2,12 +2,11 @@ package campusRecycle.controller;
 
 import campusRecycle.model.User;
 import campusRecycle.dao.UserRepository;
+import campusRecycle.responses.ResourceNotFoundException;
+import javassist.tools.web.BadHttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller    // This means that this class is a Controller
 @RequestMapping(path="/demo") // This means URL's start with /demo (after Application path)
@@ -29,10 +28,12 @@ public class TestDBController {
         return "Saved";
     }
     
-    @GetMapping(path="/addrating")
+    @PostMapping(path="/addRating")
     public @ResponseBody String addRating(@RequestParam String email, @RequestParam int rating) {
     	System.out.println("email="+email+"; rating="+Integer.toString(rating));
-    	User n = userRepository.findByEmail(email);
+    	User n = userRepository.findByEmail(email).orElseGet(() -> {
+    	    throw new ResourceNotFoundException();
+        } );
     	//System.out.println(n.getUsername());
     	n.addRating(rating);
     	userRepository.save(n);

@@ -13,12 +13,13 @@ public abstract class Person {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
-	String email;
-	char[] password;
-	String username;
+	private String email;
+	private char[] password;
+	private String username;
+//	private String confirmationToken;
 	
 	public void sendEmail(Person person, String msg) {
-		
+		// TODO
 	}
 
 	public String getEmail() {
@@ -44,5 +45,13 @@ public abstract class Person {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
+//	public String getConfirmationToken() {
+//		return confirmationToken;
+//	}
+//
+//	public void setConfirmationToken(String confirmationToken) {
+//		this.confirmationToken = confirmationToken;
+//	}
 }
 
