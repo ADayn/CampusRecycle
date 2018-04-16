@@ -14,7 +14,7 @@ public abstract class Person {
 	@GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
 	private String email;
-	private char[] password;
+	private String password;
 	private String username;
 //	private String confirmationToken;
 	
@@ -30,11 +30,11 @@ public abstract class Person {
 		this.email = email;
 	}
 
-	public char[] getPassword() {
+	public String getPassword() {
 		return password;
 	}
 
-	public void setPassword(char[] password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 

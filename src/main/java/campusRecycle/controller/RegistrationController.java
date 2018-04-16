@@ -28,8 +28,10 @@ public class RegistrationController {
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             model.addAttribute("emailUsed", true);
             return "register";
-        }
-        else {
+        } else if (userRepository.findByUsername(user.getUsername()).isPresent()) {
+            model.addAttribute("usernameUsed", true);
+            return "register";
+        } else {
             userRepository.save(user);
             // TODO: Send email
             model.addAttribute("user", user);

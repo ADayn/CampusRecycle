@@ -1,5 +1,7 @@
 package campusRecycle.config;
 
+import campusRecycle.service.UserDetailsServiceImp;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,9 +19,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/", "/home").permitAll()
+                .antMatchers("/").permitAll()
                 .antMatchers("/register").permitAll()
-                .antMatchers("/confirm").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
@@ -28,16 +29,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .logout().permitAll();
     }
 
-    @Bean
-    @Override
-    public UserDetailsService userDetailsService() {
-        UserDetails user =
-                User.withDefaultPasswordEncoder()
-                        .username("user")
-                        .password("password")
-                        .roles("USER")
-                        .build();
-
-        return new InMemoryUserDetailsManager(user);
-    }
+    @Autowired
+    UserDetailsService userDetailsService;
 }
