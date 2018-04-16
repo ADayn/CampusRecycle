@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+// Setup referenced from https://www.codebyamir.com/blog/user-account-registration-with-spring-boot
+
 @Controller
 public class RegistrationController {
     private UserRepository userRepository;

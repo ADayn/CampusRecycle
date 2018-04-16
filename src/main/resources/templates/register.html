@@ -9,7 +9,7 @@
 <div th:if="${emailUsed}">
     A user with that email already exists.
 </div>
-<form action="#" th:action="@{/register}" th:object="${user}" method="post">
+<form action="home.html" th:action="@{/register}" th:object="${user}" method="post">
     <input type="text" th:field="*{username}" placeholder="Username" required />
     <input type="password" th:field="*{password}" placeholder="Password" required />
     <input type="email" th:field="*{email}" placeholder="Email Address" required />
