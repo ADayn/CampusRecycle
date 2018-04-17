@@ -34,8 +34,8 @@ public class RegistrationController {
         } else {
             userRepository.save(user);
             // TODO: Send email
-            model.addAttribute("user", user);
-            return "home";
+//            model.addAttribute("user", user);
+            return "index";
         }
     }
 }

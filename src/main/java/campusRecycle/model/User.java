@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="Users")
-public class User extends Person{
+public class User extends Person {
     
 	@ElementCollection
 	@CollectionTable(name="User_Ratings", joinColumns=@JoinColumn(name="user_id"))
@@ -30,5 +30,10 @@ public class User extends Person{
 			avg+=rating;
 		avg=avg/ratings.size();
 		return avg;
+	}
+
+	@Override
+	String getRole() {
+		return "USER";
 	}
 }

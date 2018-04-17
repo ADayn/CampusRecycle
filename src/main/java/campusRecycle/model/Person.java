@@ -1,14 +1,16 @@
 package campusRecycle.model;
 
-import campusRecycle.model.Item;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import java.awt.event.ItemEvent;
-import java.util.List;
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 
 @MappedSuperclass
-public abstract class Person {
+public abstract class Person implements UserDetails {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -16,11 +18,6 @@ public abstract class Person {
 	private String email;
 	private String password;
 	private String username;
-//	private String confirmationToken;
-	
-	public void sendEmail(Person person, String msg) {
-		// TODO
-	}
 
 	public String getEmail() {
 		return email;
@@ -28,6 +25,13 @@ public abstract class Person {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		ArrayList<GrantedAuthority> col = new ArrayList<>(1);
+		col.add(new SimpleGrantedAuthority("ROLE_" + this.getRole()));
+		return col;
 	}
 
 	public String getPassword() {
@@ -42,16 +46,31 @@ public abstract class Person {
 		return username;
 	}
 
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
+
+	abstract String getRole();
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
-//	public String getConfirmationToken() {
-//		return confirmationToken;
-//	}
-//
-//	public void setConfirmationToken(String confirmationToken) {
-//		this.confirmationToken = confirmationToken;
-//	}
 }
 
