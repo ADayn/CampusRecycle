@@ -7,6 +7,7 @@
 <body>
 <h1>HOME PAGE</h1>
 <span th:text="${#authentication.getPrincipal().getUsername()}"></span>
+<a th:href="@{/items/mine}">My Sales</a>
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Sign Out"/>
 </form>

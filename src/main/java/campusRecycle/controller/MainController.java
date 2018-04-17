@@ -7,14 +7,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-// Setup referenced from https://www.codebyamir.com/blog/user-account-registration-with-spring-boot
-
 @Controller
-public class RegistrationController {
+public class MainController {
     private UserRepository userRepository;
 
-    public RegistrationController(UserRepository userRepository) {
+    public MainController(UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    @GetMapping("/home")
+    public String showRegistrationPage(Model model) {
+        return "home";
     }
 
     @GetMapping("/register")
@@ -34,8 +37,8 @@ public class RegistrationController {
         } else {
             userRepository.save(user);
             // TODO: Send email
-//            model.addAttribute("user", user);
             return "index";
         }
     }
+
 }

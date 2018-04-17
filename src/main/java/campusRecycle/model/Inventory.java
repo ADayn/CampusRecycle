@@ -15,11 +15,15 @@ public class Inventory {
     }
 
     public ItemList getListByState(ItemState state) {
-        return new ItemList(itemRepository.getByState(state));
+        return new ItemList(itemRepository.getAllByState(state));
     }
 
-    public ItemList getListByStateAndCategory(ItemState state, String category) {
-        return new ItemList(itemRepository.getByStateAndCategory(state, category));
+    public ItemList getListByStateAndCategory(ItemState state, Category category) {
+        return new ItemList(itemRepository.getAllByStateAndCategory(state, category));
+    }
+
+    public ItemList getListBySellerAndState(User seller, ItemState state) {
+        return new ItemList(itemRepository.getAllBySellerAndState(seller, state));
     }
 
 }
