@@ -12,7 +12,7 @@ public class User extends Person {
 	@Column(name="ratings")
 	List<Integer> ratings;
 	 
-	public void addRating(int rate) {
+	public void addRating(Integer rate) {
 		ratings.add(rate);
 	}
 		

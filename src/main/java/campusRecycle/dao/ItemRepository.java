@@ -12,11 +12,11 @@ import java.util.List;
 // CRUD refers Create, Read, Update, Delete
 
 public interface ItemRepository extends CrudRepository<Item, Long> {
-    List<Item> getAllByState(ItemState state);
+    List<Item> findAllByState(ItemState state);
 
-    List<Item> getAllByStateAndCategory(ItemState state, Category category);
+    List<Item> findAllByStateAndCategory(ItemState state, Category category);
 
-    List<Item> getAllBySellerAndState(User seller, ItemState state);
+    List<Item> findAllBySellerAndState(User seller, ItemState state);
 
-    List<Item> getAllByBuyer(User seller);
+    List<Item> findAllByBuyer(User seller);
 }

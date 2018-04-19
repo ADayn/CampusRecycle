@@ -6,6 +6,20 @@
 </head>
 <body>
 <h4>Post Item</h4>
-TODO
+<form th:action="@{/items/post}" th:object="${item}" method="post">
+    <span th:if="${#fields.hasErrors('title')}">Title Required</span>
+    <!--<input hidden type="text" th:field="*{seller}" th:default="${currentUserid}" />-->
+    <!--<input hidden type="text" th:field="*{datePosted}" th:default="${#dates.createNow()}" />-->
+    <input type="text" th:field="*{title}" placeholder="Title" required />
+    <input type="text" th:field="*{description}" placeholder="Description" />
+    <span th:if="${#fields.hasErrors('price')}">Price Required</span>
+    <input type="number" th:field="*{price}" placeholder="Price" required />
+    <select th:field="*{category}" title="Category">
+        <option th:each="cat : ${categories}"
+                th:value="${cat.id}"
+                th:text="${cat.name}"></option>
+    </select>
+    <button type="submit">Post</button>
+</form>
 </body>
 </html>

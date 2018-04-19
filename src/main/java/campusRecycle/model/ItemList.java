@@ -59,7 +59,7 @@ public class ItemList implements Iterable<Item> {
 		return foundItems;
 	}
 	
-	public Item getByItemId(int id){
+	public Item getByItemId(Long id){
 		for (Item item: items) {
 			if(item.getId() == id)
 				return item;

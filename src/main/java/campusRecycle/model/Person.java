@@ -14,7 +14,7 @@ public abstract class Person implements UserDetails {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 	private String email;
 	private String password;
 	private String username;
@@ -51,16 +51,19 @@ public abstract class Person implements UserDetails {
 		return true;
 	}
 
+	// Needed for UserDetail
 	@Override
 	public boolean isAccountNonLocked() {
 		return true;
 	}
 
+	// Needed for UserDetail
 	@Override
 	public boolean isCredentialsNonExpired() {
 		return true;
 	}
 
+	// Needed for UserDetail
 	@Override
 	public boolean isEnabled() {
 		return true;
@@ -72,5 +75,13 @@ public abstract class Person implements UserDetails {
 		this.username = username;
 	}
 
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 }
 
