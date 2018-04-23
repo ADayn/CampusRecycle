@@ -88,33 +88,5 @@ public class ItemController {
     	model.addAttribute("item", item);
     	return "itemDetail";
     }
-    
-    @GetMapping("/allpendings")
-    public String showPendingList(Model model) {
-    	ItemList itemList=inventory.findListByState(ItemState.PENDING);
-    	model.addAttribute(itemList);
-    	return "pendings";
-    }
-    
-    @PostMapping("/allpendings")
-    public String processPending(
-    		@RequestParam("item_id") long item_id,
-    		@RequestParam("option") String option,
-    		@ModelAttribute("item") Item item) {
-    	System.out.println(item_id);
-    	System.out.println(option); 
-    	Item itemx=inventory.findItemById(item_id);
-    	if(option.equals("approve")) {
-    		System.out.println("itemx set state");
-    		itemx.setState(ItemState.ACTIVE);
-    	}else
-    		itemx.setState(ItemState.DENIED);
-    	System.out.println("to post itemx");
-    	System.out.println(itemx.getState());
-    	inventory.postItem(itemx);
-    	
-    	System.out.println("after post itemx");
-    	return "redirect:/items/allpendings";
-    }
-    
+        
 }

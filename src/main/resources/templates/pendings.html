@@ -23,7 +23,7 @@
          <td th:text="${item.datePosted}"></td>
           <td> <a th:href="@{'/items/detail?id='+${item.id}}">view</a></td>
          <td>
-           <form th:action="@{/items/allpendings}" th:object="${item}" method="post">
+           <form th:action="@{/admin/allpendings}" th:object="${item}" method="post">
              <input name="item_id" th:value="${item.id}" type="hidden" />
              <input type="submit" name="option" value="approve"/>
              <input type="submit" name="option" value="deny"/>
