@@ -14,6 +14,8 @@ public class ItemList implements Iterable<Item> {
 		List<Item> sortedItems = new ArrayList<Item>(items);
 		if(key == SortKey.PRICE) {
 			comparator=new ItemPriceComparator();
+		}else if(key==SortKey.DATE) {
+			comparator=new ItemDateComparator();
 		}
 		Collections.sort(sortedItems,comparator);
 		return sortedItems;

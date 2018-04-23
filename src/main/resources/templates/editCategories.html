@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Category List</title>
+</head>
+<body>
+
+<table>
+	<tr>
+	  <th> Category </th>
+	  <th> Operations </th>
+	</tr>
+	   <tr th:each="cat : ${catList} ">
+         <td th:text="${cat.name}"></td>
+         <td>
+           <form th:action="@{/admin/categories}" th:object="${cat}" method="delete">
+             <input name="cat_id" th:value="${cat.id}" type="hidden" />
+             <input type="submit" name="delete" value="delete"/>
+           </form>
+         </td>
+       </tr>
+       <tr>
+          <form th:action="@{/admin/categories}" th:object="${new_cat}" method="post">
+          <td>
+            <input type="text" placeholder="category name" name="new_cat.name"/>
+          </td>  
+         <td>
+            <input type="submit" name="add" value="add"/>
+         </td>
+       </tr>
+	
+</table>
+</body>
+</html>

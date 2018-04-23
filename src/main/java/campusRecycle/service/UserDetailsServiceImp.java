@@ -1,5 +1,6 @@
 package campusRecycle.service;
 
+import campusRecycle.dao.AdminRepository;
 import campusRecycle.dao.UserRepository;
 import campusRecycle.model.Person;
 import campusRecycle.util.OptionalUtils;
@@ -15,10 +16,12 @@ import java.util.Optional;
 public class UserDetailsServiceImp implements UserDetailsService {
 
     private UserRepository userRepository;
+    private AdminRepository adminRepository;
 
     @Autowired
-    public UserDetailsServiceImp(UserRepository userRepository) {
+    public UserDetailsServiceImp(UserRepository userRepository, AdminRepository adminRepository) {
         this.userRepository = userRepository;
+        this.adminRepository = adminRepository;
     }
 
     @Override
@@ -30,10 +33,12 @@ public class UserDetailsServiceImp implements UserDetailsService {
                 })
                 .orElseThrow(() -> new UsernameNotFoundException("Username \"" + s + "\" not found"));
     }
+    
+
 
     private Optional<? extends Person> getAdminDetails(String s) {
         // TODO
-        return Optional.empty();
+    	return adminRepository.findByUsername(s);
     }
 
     private Optional<? extends Person> getUserDetails(String s) {

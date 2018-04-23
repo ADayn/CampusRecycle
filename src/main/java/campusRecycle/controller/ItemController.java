@@ -11,14 +11,17 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+
 import javax.validation.Valid;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -70,6 +73,7 @@ public class ItemController {
         } else {
             item.setSeller(seller);
             item.setDatePosted(new Date());
+            item.setState(ItemState.PENDING);
             inventory.postItem(item);
             model.addAttribute("item", item);
             return "uploadImage";
@@ -102,4 +106,12 @@ public class ItemController {
     public String showSuccess() {
         return "postSuccess";
     }
+    
+    @GetMapping("/detail") // detail?id=
+    public String showItemDetail(@RequestParam(value="id") long id, Model model) {
+    	Item item=inventory.findById(id).get();
+    	model.addAttribute("item", item);
+    	return "itemDetail";
+    }
+        
 }

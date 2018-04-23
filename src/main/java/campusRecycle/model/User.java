@@ -33,7 +33,7 @@ public class User extends Person {
 	}
 
 	@Override
-	String getRole() {
+	public String getRole() {
 		return "USER";
 	}
 }

@@ -3,3 +3,5 @@ INSERT INTO categories (id, name) VALUES
   (2, 'Bikes');
 INSERT  INTO users (id, email, username, password) VALUES
   (1, 'a@a.a', 'u', 'p');
+INSERT INTO admins(id, email, username, password) VALUES
+  (1, 'admin@admin', 'admin', 'admin');

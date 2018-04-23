@@ -31,7 +31,8 @@ public class Inventory {
 
     public void postItem(Item item) {
         // TODO: Change to pending once admin is implemented
-        item.setState(ItemState.ACTIVE);
+        //item.setState(ItemState.ACTIVE);
+    	//item.setState(ItemState.PENDING);
         itemRepository.save(item);
     }
 
