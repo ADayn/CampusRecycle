@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html lang="en-US" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Item Detail</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h4 th:text="${item.title}"> Item Title </h4>
+<p th:text="${item.description}"> Item desc </p>
+<p th:text="${item.price}"> Item price </p>
+<p th:text="${item.seller.username}"> sell by </p>
+<p th:text="${item.datePosted}"> date posted </p>
+</body>
+</html>

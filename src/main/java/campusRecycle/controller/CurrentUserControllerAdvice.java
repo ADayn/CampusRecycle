@@ -31,4 +31,11 @@ public class CurrentUserControllerAdvice {
                 .map(Person::getId)
                 .orElse(null);
     }
+    
+    @ModelAttribute("isAdmin")
+    public boolean getIsAdmin(Authentication authentication) {
+    	if(authentication != null && ((Person)authentication.getPrincipal()).getRole().equals("Admin"))
+    		return(true);
+    	return false;
+    }
 }

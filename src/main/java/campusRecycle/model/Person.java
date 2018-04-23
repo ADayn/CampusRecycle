@@ -69,7 +69,7 @@ public abstract class Person implements UserDetails {
 		return true;
 	}
 
-	abstract String getRole();
+	public abstract String getRole();
 
 	public void setUsername(String username) {
 		this.username = username;

@@ -15,10 +15,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -68,6 +71,7 @@ public class ItemController {
         } else {
             item.setSeller(seller);
             item.setDatePosted(new Date());
+            item.setState(ItemState.PENDING);
             inventory.postItem(item);
             return "redirect:/items/post/success";
         }
@@ -77,4 +81,40 @@ public class ItemController {
     public String showSuccess() {
         return "postSuccess";
     }
+    
+    @GetMapping("/detail") // detail?id=
+    public String showItemDetail(@RequestParam(value="id") long id, Model model) {
+    	Item item=inventory.findItemById(id);
+    	model.addAttribute("item", item);
+    	return "itemDetail";
+    }
+    
+    @GetMapping("/allpendings")
+    public String showPendingList(Model model) {
+    	ItemList itemList=inventory.findListByState(ItemState.PENDING);
+    	model.addAttribute(itemList);
+    	return "pendings";
+    }
+    
+    @PostMapping("/allpendings")
+    public String processPending(
+    		@RequestParam("item_id") long item_id,
+    		@RequestParam("option") String option,
+    		@ModelAttribute("item") Item item) {
+    	System.out.println(item_id);
+    	System.out.println(option); 
+    	Item itemx=inventory.findItemById(item_id);
+    	if(option.equals("approve")) {
+    		System.out.println("itemx set state");
+    		itemx.setState(ItemState.ACTIVE);
+    	}else
+    		itemx.setState(ItemState.DENIED);
+    	System.out.println("to post itemx");
+    	System.out.println(itemx.getState());
+    	inventory.postItem(itemx);
+    	
+    	System.out.println("after post itemx");
+    	return "redirect:/items/allpendings";
+    }
+    
 }

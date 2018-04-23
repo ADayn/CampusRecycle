@@ -5,11 +5,22 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
+<span th:unless="${isAdmin}">  
 <h1>HOME PAGE</h1>
 <span th:text="${currentUsername}"></span>
 <a th:href="@{/items/posted}">My Sales</a>
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Sign Out"/>
 </form>
+</span>
+<span th:if="${isAdmin}">
+<h1>ADMIN HOME PAGE</h1>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+    <p><a th:href="@{/items/allpendings}"> Pending Posts </a></p>
+    <p><a th:href="@{/categories}"> Categories </a></p>
+    <p><a th:href="@{/users}"> Users </a></p>
+</form>
+</span>
 </body>
 </html>
