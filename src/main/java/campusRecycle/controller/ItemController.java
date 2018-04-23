@@ -16,23 +16,26 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Date;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("items")
+@RequestMapping("/items")
 public class ItemController {
     private UserRepository userRepository;
     private Inventory inventory;
     private CategoryRepository categoryRepository;
+//    private HttpServletRequest request;
 
     @Autowired
-    public ItemController(UserRepository userRepository, Inventory inventory, CategoryRepository categoryRepository) {
+    public ItemController(UserRepository userRepository, Inventory inventory, CategoryRepository categoryRepository, HttpServletRequest request) {
         this.userRepository = userRepository;
         this.inventory = inventory;
         this.categoryRepository = categoryRepository;
+//        this.request = request;
     }
 
 

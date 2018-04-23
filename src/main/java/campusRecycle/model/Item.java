@@ -17,7 +17,7 @@ public class Item {
 
     private String description;
 
-    private String imagePath;
+    private byte[] imagePath;
 
     @Column(nullable = false)
     @NotNull
@@ -65,11 +65,11 @@ public class Item {
         this.description = description;
     }
 
-    public String getImagePath() {
+    public byte[] getImagePath() {
         return imagePath;
     }
 
-    public void setImagePath(String imagePath) {
+    public void setImagePath(byte[] imagePath) {
         this.imagePath = imagePath;
     }
 

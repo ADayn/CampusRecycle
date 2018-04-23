@@ -44,4 +44,9 @@ public class MainController {
         }
     }
 
+    @GetMapping("/login")
+    public String showLoginPage(Model model) {
+        return "login";
+    }
+
 }

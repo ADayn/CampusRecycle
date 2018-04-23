@@ -2,7 +2,6 @@ package campusRecycle.controller;
 
 import campusRecycle.dao.UserRepository;
 import campusRecycle.model.Person;
-import campusRecycle.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
