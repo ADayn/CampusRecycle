@@ -25,6 +25,8 @@ public class User extends Person {
 	}
 
 	public float calcAverageRating() {
+		if(ratings.size()==0)
+			return 0;
 		float avg=0;
 		for (Integer rating: ratings)
 			avg+=rating;

@@ -35,7 +35,7 @@ public class Inventory {
     	//item.setState(ItemState.PENDING);
         itemRepository.save(item);
     }
-
+  
     public Optional<Item> findById(Long id) {
         return itemRepository.findById(id);
     }

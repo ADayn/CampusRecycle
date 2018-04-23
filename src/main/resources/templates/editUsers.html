@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>User List</title>
+</head>
+<body>
+
+<table>
+	<tr>
+	  <th>  Username </th>
+	  <th>  Email </th>
+	  <th>  AverageRating </th>
+	  <th>  Operations </th>
+	</tr>
+	   <tr th:each="user : ${userList} ">
+         <td th:text="${user.username}"></td>
+         <td th:text="${user.email}"> </td>
+         <td th:text="${user.calcAverageRating()}"> </td>  
+         <td>
+            <form th:action="@{/admin/users}" th:object="${user}" method="post"> 
+               <input name="user_id" th:value="${user.id}" type="hidden" /> 
+               <input type="submit" name="option" value="delete"/> 
+            </form>  
+         </td>
+       </tr>
+	
+</table>
+</body>
+</html>
