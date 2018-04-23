@@ -11,13 +11,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.Date;
 import java.util.Optional;
@@ -61,7 +60,7 @@ public class ItemController {
     }
 
     @PostMapping("/post")
-    public String postItem(@Valid Item item, BindingResult bindingResult, Authentication authentication) {
+    public String postItem(@Valid Item item, BindingResult bindingResult, Authentication authentication, Model model) {
         User seller = Optional.ofNullable(authentication)
                 .map(auth -> (UserDetails) authentication.getPrincipal())
                 .flatMap(details -> userRepository.findByUsername(details.getUsername()))
@@ -72,8 +71,31 @@ public class ItemController {
             item.setSeller(seller);
             item.setDatePosted(new Date());
             inventory.postItem(item);
-            return "redirect:/items/post/success";
+            model.addAttribute("item", item);
+            return "uploadImage";
         }
+    }
+
+    @PostMapping("/{itemId}/uploadImage")
+    public String postItem(@PathVariable Long itemId, @RequestParam("file") MultipartFile file, Model model) {
+        Item item = inventory.findById(itemId).get();
+        try {
+            item.setImage(file.getBytes());
+            inventory.update(item);
+            return "redirect:/items/post/success";
+        } catch (IOException e) {
+            // TODO: Log error
+            e.printStackTrace();
+            return "uploadImage";
+        }
+    }
+
+    @GetMapping("/{itemId}/image")
+    @ResponseBody public byte[] getImage(@PathVariable Long itemId, Model model) {
+        return inventory
+                .findById(itemId)
+                .map(Item::getImage)
+                .orElseThrow(ResourceNotFoundException::new);
     }
 
     @GetMapping("/post/success")

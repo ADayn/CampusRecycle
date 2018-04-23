@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Add Image</title>
+</head>
+<body>
+<h4>Add Image</h4>
+<form th:action="@{'/items/' + ${item.id} + '/uploadImage'}"
+      enctype="multipart/form-data"
+      method="post">
+    <input type="file" name="file" />
+    <button type="submit">Post</button>
+</form>
+<a th:href="@{/items/post/success}">Post without image</a>
+</body>
+</html>

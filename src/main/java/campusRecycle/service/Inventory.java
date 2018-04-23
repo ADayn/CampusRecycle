@@ -5,6 +5,8 @@ import campusRecycle.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class Inventory {
 
@@ -30,6 +32,14 @@ public class Inventory {
     public void postItem(Item item) {
         // TODO: Change to pending once admin is implemented
         item.setState(ItemState.ACTIVE);
+        itemRepository.save(item);
+    }
+
+    public Optional<Item> findById(Long id) {
+        return itemRepository.findById(id);
+    }
+
+    public void update(Item item) {
         itemRepository.save(item);
     }
 

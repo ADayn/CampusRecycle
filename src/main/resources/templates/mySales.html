@@ -14,6 +14,7 @@
     </tr>
     <tr th:each="item : ${activeItems} ">
         <td th:text="${item.title}"></td>
+        <td><img th:src="@{'/items/' + ${item.id} + '/image'}"/></td>
         <td th:text="${item.category.name}"></td>
         <td th:text="${#numbers.formatCurrency(item.price)}"></td>
     </tr>

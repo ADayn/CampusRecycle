@@ -17,7 +17,8 @@ public class Item {
 
     private String description;
 
-    private byte[] imagePath;
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] image;
 
     @Column(nullable = false)
     @NotNull
@@ -65,12 +66,12 @@ public class Item {
         this.description = description;
     }
 
-    public byte[] getImagePath() {
-        return imagePath;
+    public byte[] getImage() {
+        return image;
     }
 
-    public void setImagePath(byte[] imagePath) {
-        this.imagePath = imagePath;
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     public double getPrice() {
