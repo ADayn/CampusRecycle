@@ -10,6 +10,7 @@
     <span th:if="${#fields.hasErrors('title')}">Title Required</span>
     <!--<input hidden type="text" th:field="*{seller}" th:default="${currentUserid}" />-->
     <!--<input hidden type="text" th:field="*{datePosted}" th:default="${#dates.createNow()}" />-->
+    <input type="hidden" th:field="*{id}"/>
     <input type="text" th:field="*{title}" placeholder="Title" required />
     <input type="text" th:field="*{description}" placeholder="Description" />
     <span th:if="${#fields.hasErrors('price')}">Price Required</span>

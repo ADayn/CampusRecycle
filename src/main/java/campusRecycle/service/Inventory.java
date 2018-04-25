@@ -35,13 +35,17 @@ public class Inventory {
     	//item.setState(ItemState.PENDING);
         itemRepository.save(item);
     }
-  
+   
     public Optional<Item> findById(Long id) {
         return itemRepository.findById(id);
     }
 
     public void update(Item item) {
         itemRepository.save(item);
+    }
+    
+    public void delete(Item item) {
+    	itemRepository.delete(item);
     }
 
 }

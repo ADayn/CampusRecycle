@@ -2,24 +2,102 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>My Sales</title>
+
 </head>
 <body>
+
+
+TODO
+<a th:href="@{/items/post}">post</a>
 <h2>My Sales</h2>
 <h4>Active</h4>
 <table>
     <tr>
         <th>Title</th>
+        <th>Image</th>
         <th>Category</th>
         <th>Price</th>
+        <th>View</th>
+        <th>Options</th>
     </tr>
     <tr th:each="item : ${activeItems} ">
         <td th:text="${item.title}"></td>
         <td><img th:src="@{'/items/' + ${item.id} + '/image'}"/></td>
         <td th:text="${item.category.name}"></td>
         <td th:text="${#numbers.formatCurrency(item.price)}"></td>
+        <td> <a th:href="@{'/items/detail?id='+${item.id}}">view</a></td>
+        <td>
+          <form th:action="@{/items/modify}" method="post">
+            <input type="hidden" name="item_id" th:value="${item.id}" />
+            <input type="submit" name="option" value="update" th:onclick="|hideBuyerInputs(${item.id})|"/>
+            <input type="submit" name="option" value="delete" th:onclick="|hideBuyerInputs($item.id})|"/>
+            <input type="hidden" name="item_id" th:value="${item.id}" />
+            <input type="button" th:id="${'sold_button_'+item.id}" name="buttom" value="sold" th:onclick="|showBuyerInputs(${item.id})|" />
+            <input type="text" th:id="${'buyer_input_'+item.id}" style="display:none" name="buyer_email" placeholder="buyer email" /> 
+            <input type="submit" th:id="${'sold_commit_'+item.id}" style="display:none" name="option" value="sold" />
+          </form>
+        </td>
     </tr>
 </table>
-TODO
-<a th:href="@{/items/post}">post</a>
+<h4>Pending</h4>
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Image</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>View</th>
+        <th>Options</th>
+    </tr>
+    <tr th:each="item : ${pendingItems} ">
+        <td th:text="${item.title}"></td>
+        <td><img th:src="@{'/items/' + ${item.id} + '/image'}"/></td>
+        <td th:text="${item.category.name}"></td>
+        <td th:text="${#numbers.formatCurrency(item.price)}"></td>
+        <td> <a th:href="@{'/items/detail?id='+${item.id}}">view</a></td>
+        <td>
+           <form th:action="@{/items/modify}" method="post">
+            <input type="hidden" name="item_id" th:value="${item.id}" />
+            <input type="submit" name="option" value="update" />
+            <input type="submit" name="option" value="delete" />
+          </form>
+        </td>
+    </tr>
+</table>
+<h4>Sold</h4>
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Image</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>View</th>
+        <th> Sold-to</th>
+    </tr>
+    <tr th:each="item : ${soldItems} ">
+        <td th:text="${item.title}"></td>
+        <td><img th:src="@{'/items/' + ${item.id} + '/image'}"/></td>
+        <td th:text="${item.category.name}"></td>
+        <td th:text="${#numbers.formatCurrency(item.price)}"></td>
+        <td> <a th:href="@{'/items/detail?id='+${item.id}}">view</a></td>
+        <td th:text="${item.buyer.email}"> </td>
+    </tr>
+</table>
+    <script>
+      function showBuyerInputs(item_id){
+      	  document.getElementById("sold_button_"+item_id).style.display="none";
+      	  document.getElementById("buyer_input_"+item_id).style.display="inline";
+      	  document.getElementById("buyer_input_"+item_id).required=true;
+      	  document.getElementById("sold_commit_"+item_id).style.display="inline";
+      }
+      
+      function hideBuyerInputs(item_id){
+      	  document.getElementById("sold_button_"+item_id).style.display="inline";
+      	  document.getElementById("buyer_input_"+item_id).style.display="none";
+      	  document.getElementById("buyer_input_"+item_id).required=false;
+      	  document.getElementById("sold_commit_"+item_id).style.display="none";
+      }
+      
+    </script>
 </body>
 </html>

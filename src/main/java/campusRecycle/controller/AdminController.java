@@ -90,8 +90,7 @@ public class AdminController {
 	@PostMapping("/allpendings")
 	public String processPending(
 			@RequestParam("item_id") long item_id,
-			@RequestParam("option") String option,
-			@ModelAttribute("item") Item item) {
+			@RequestParam("option") String option) {
 		//System.out.println(item_id);
 		//System.out.println(option); 
 		Item itemx=inventory.findById(item_id).get();

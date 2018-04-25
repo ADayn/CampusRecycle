@@ -71,6 +71,7 @@ public class ItemController {
         if (bindingResult.hasErrors()) {
             return "postItem";
         } else {
+        	System.out.println("In postItem "+item.getId());
             item.setSeller(seller);
             item.setDatePosted(new Date());
             item.setState(ItemState.PENDING);
@@ -112,6 +113,34 @@ public class ItemController {
     	Item item=inventory.findById(id).get();
     	model.addAttribute("item", item);
     	return "itemDetail";
+    }
+    
+    @PostMapping("/modify") //update,mark as sold, or delete
+    public String modifyItem(@RequestParam(value="item_id") long id, 
+    		      @RequestParam(value="buyer_email") Optional<String> buyer_email,
+    		      @RequestParam(value="option") String option, Model model) {
+    	System.out.println(id);
+    	System.out.println(buyer_email);
+    	Item item=inventory.findById(id).get();
+    	System.out.println(item.getDescription());
+    	if (option.equals("update")) {
+    		model.addAttribute(item);
+    		System.out.println(item.getId());
+    		return "postItem";
+    	}else if(option.equals("delete")) {
+    		inventory.delete(item);
+    		return "redirect:/items/posted";
+    	}else { // mark as sold
+    		Optional<User> buyer=userRepository.findByEmail(buyer_email.get());
+    		if(!buyer.isPresent()) {
+    			return "buyerNotFound";
+    		}
+    		item.setState(ItemState.SOLD);
+    		item.setBuyer(buyer.get());
+    		inventory.update(item);
+    		return "redirect:/items/posted";
+    	}
+    	
     }
         
 }
