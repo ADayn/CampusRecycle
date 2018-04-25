@@ -1,15 +1,75 @@
+<!--Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
 <!DOCTYPE HTML>
 <html lang="en-US" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Item Detail</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Item Detail</title>
+	<!-- Meta tag Keywords -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="Effective Login Form Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements"
+	/>
+	<script>
+		addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
+
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+	</script>
+	<!-- Meta tag Keywords -->
+	<!-- css files -->
+	<link rel="stylesheet" href="css/style_detail.css" type="text/css" media="all" />
+	<!-- Style-CSS -->
+	<link rel="stylesheet" href="css/font-awesome.css">
+	<!-- Font-Awesome-Icons-CSS -->
+	<!-- //css files -->
+	<!-- web-fonts -->
+	<link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+	<!-- //web-fonts -->
 </head>
+
 <body>
-<h4 th:text="${item.title}"> Item Title </h4>
-<p th:text="${'status: '+item.state}" > Item State </p>
-<p th:text="${item.description}"> Item desc </p>
-<p th:text="${item.price}"> Item price </p>
-<p th:text="${item.seller.username}"> sell by </p>
-<p th:text="${item.datePosted}"> date posted </p>
+	<div class="video-w3l" data-vide-bg="video/1">
+		<!--header-->
+		<div class="header-w3l">
+			<h1>
+				Item Detail
+			</h1>
+		</div>
+		<!--//header-->
+		<div class="main-content-agile">
+			<div class="sub-main-w3">
+				<h2 th:text="${item.title}">Your Item
+					<i class="fa fa-hand-o-down" aria-hidden="true"></i>
+				</h2>
+				<form action="#" method="post">
+					<p th:text="${item.description}"> Item desc </p>
+					<p th:text="${item.price}"> Item price </p>
+					<p th:text="${item.seller.username}"> sell by </p>
+					<p th:text="${item.datePosted}"> date posted </p>
+				</form>
+			</div>
+		</div>
+		<!--//main-->
+		<!--footer-->
+		<div class="footer">
+			<p>&copy; 2018 CampusRecycle. All rights reserved 
+			</p>
+		</div>
+		<!--//footer-->
+	</div>
+
+	<!-- js -->
+	<script src="js/jquery-2.1.4.min.js"></script>
+	<script src="js/jquery.vide.min.js"></script>
+	<!-- //js -->
+
 </body>
+
 </html>

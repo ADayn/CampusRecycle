@@ -1,15 +1,45 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Category List</title>
+<title>Category List</title>
+<!-- Meta tag Keywords -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Transparent Sign In Form Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Meta tag Keywords -->
+<!-- css files -->
+<link rel="stylesheet" href="css/font-awesome_cate.css"> <!-- Font-Awesome-Icons-CSS -->
+<link rel="stylesheet" href="css/style_cate.css" type="text/css" media="all" /> <!-- Style-CSS --> 
+<!-- //css files -->
+<!-- web-fonts -->
+<link href="//fonts.googleapis.com/css?family=Raleway:400,500,600,700,800" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+<!-- //web-fonts -->
 </head>
 <body>
-
-<table>
+		<!--header-->
+		<div class="header-w3l">
+			<h1>Category List</h1>
+		</div>
+		<!--//header-->
+		<!--main-->
+		<div class="main-content-agile">
+			<div class="sub-main-w3">	
+				
+				<form action="#" method="post">
+					<table>
 	<tr>
-	  <th> Category </th>
-	  <th> Operations </th>
+	  <th color="white"> Category </th>
+	  <th color="white"> Operations </th>
 	</tr>
 	   <tr th:each="cat : ${catList} ">
          <td th:text="${cat.name}"></td>
@@ -32,5 +62,18 @@
        </tr>
 	
 </table>
+				</form>
+			</div>
+		</div>
+		<!--//main-->
+		<!--footer-->
+		<div class="footer">
+			<p>&copy; 2018 CampusRecycle. All rights reserved </p>
+		</div>
+		<!--//footer-->
+<!-- js -->
+<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<script src="js/jquery.vide.min.js"></script>
+<!-- //js -->
 </body>
 </html>

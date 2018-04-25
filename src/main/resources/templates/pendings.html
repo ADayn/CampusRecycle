@@ -1,20 +1,43 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
 <head>
-    <title>Pending List</title>
+<title>Pending List</title>
+<!-- custom-theme -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Aridity Weather Widget Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- //custom-theme -->
+<link href="css/style_pending.css" rel="stylesheet" type="text/css" media="all" />
+<!-- js -->
+<script type="text/javascript" src="js_2/jquery.min.js"></script>
+<!-- //js --> 
+<link rel="stylesheet" type="text/css" href="css/easy-responsive-tabs.css " />
+<link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;subset=latin-ext" rel="stylesheet">
 </head>
-<body>
-<h1>Pending List </h1>
-<table>
-	<tr>
+<body onload="startTime()">
+	<div class="main">	
+		<h1>Pending List</h1>
+		<div class="w3_agile_main_grids">
+			<table>
+			<tr>
 	  <th> Title </th>
 	  <th> Seller </th>
 	  <th> Category </th>
 	  <th> Date </th>
 	  <th> Details </th>
       <th> Operations </th> 
-	</tr>
+			</tr>
 	<tr>
 	   <tr th:each="item : ${itemList} ">
          <td th:text="${item.title}"></td>
@@ -23,14 +46,26 @@
          <td th:text="${item.datePosted}"></td>
           <td> <a th:href="@{'/items/detail?id='+${item.id}}">view</a></td>
          <td>
-           <form th:action="@{/admin/allpendings}" method="post">
+           <form th:action="@{/admin/allpendings}" th:object="${item}" method="post">
              <input name="item_id" th:value="${item.id}" type="hidden" />
              <input type="submit" name="option" value="approve"/>
              <input type="submit" name="option" value="deny"/>
            </form>
          </td>
        </tr>
-	</tr>
+	
 </table>
+	
+				
+						</div>
+					</div>
+				
+				<div class="clear"> </div>
+
+		<div class="agileits_copyright">
+			<p>© 2018 CampusRecycle. All rights reserved </p>
+		</div>
+
+
 </body>
 </html>
