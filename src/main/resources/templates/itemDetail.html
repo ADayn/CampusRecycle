@@ -49,10 +49,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<i class="fa fa-hand-o-down" aria-hidden="true"></i>
 				</h2>
 				<form action="#" method="post">
-					<p th:text="${item.description}"> Item desc </p>
-					<p th:text="${item.price}"> Item price </p>
-					<p th:text="${item.seller.username}"> sell by </p>
-					<p th:text="${item.datePosted}"> date posted </p>
+				    <p> Description </p>
+					<p th:text="${'&nbsp;&nbsp;'+item.description}"> Item desc </p>
+					<p th:text="${'price:&nbsp;&nbsp;'+item.price}"> Item price </p>
+					<p th:text="${'sell by:&nbsp;&nbsp;'+item.seller.username}"> sell by </p>
+					<p th:text="${'date of post:&nbsp;&nbsp;' + item.datePosted}"> date posted </p>
+					<span th:if="${item.image != null}">
+					<img th:src="@{'/items/' + ${item.id} + '/image'}" height=300 width=300 /> 
+					</span> 
 				</form>
 			</div>
 		</div>
