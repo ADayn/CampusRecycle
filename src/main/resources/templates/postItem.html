@@ -10,11 +10,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <head>
 <title>Post Item</title>
-<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+<link th:href="@{/css/bootstrap.css}" rel='stylesheet' type='text/css' />
 <!-- Custom Theme files -->
-<link href="css/style_post.css" rel="stylesheet" type="text/css" media="all" />
+<link th:href="@{/css/style_post.css}" rel="stylesheet" type="text/css" media="all" />
 <!-- Custom Theme files -->
-<script src="js_1/jquery.min.js"></script>
+<script th:src="@{/js_1/jquery.min.js}"></script>
 <!-- Custom Theme files -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -31,6 +31,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="login-form">
 			<form th:action="@{/items/post}" th:object="${item}" method="post">
 				<div>
+				    <input type="hidden" th:field="*{id}"/>
 					<span>Title</span>
 					<span th:if="${#fields.hasErrors('title')}">Title Required</span>
 						<input type="text" th:field="*{title}" placeholder="Title" required / class="title" value="Eg: Apple" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Eg: Apple';}" />
@@ -47,10 +48,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                				 th:value="${cat.id}"
                 			th:text="${cat.name}"></option>
     				</select>
+    				<button type="submit">Post</button>
 				</div>
 			</form>
 
-			<form id="upload" method="post" action="postItem.php" enctype="multipart/form-data">
+		<!-- 	<form id="upload" method="post" action="postItem.php" enctype="multipart/form-data">
 				<div id="drop">
 				<a>Post</a>
 				<input type="file" name="upl" multiple />
@@ -58,10 +60,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 				
 				<ul>
-				<!-- The file uploads will be shown here -->
+				<!-- The file uploads will be shown here - ->
 				</ul>
 
-			</form>
+			</form>  -->
 		</div>
 			
 	<!-- JavaScript Includes -->

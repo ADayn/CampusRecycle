@@ -13,7 +13,7 @@ import java.util.Collection;
 public abstract class Person implements UserDetails {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 	private String email;
 	private String password;

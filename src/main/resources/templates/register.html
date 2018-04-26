@@ -36,7 +36,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 				<img src="images/profile.jpg" alt="image">
 				<h2>signup here</h2>
 			</div>	
-			<form action="#" method="post" th:action="@{/register}" th:object="${user}" method="post">
+			<form th:action="@{/register}" th:object="${user}" method="post">
 				<div class="w3l-user">
 					<span><i class="fa fa-user-circle-o w3l-1" aria-hidden="true"></i></span>
 					<span th:if="${usernameUsed}">Username taken</span>

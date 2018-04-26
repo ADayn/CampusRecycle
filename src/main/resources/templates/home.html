@@ -15,7 +15,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!--// Meta tag Keywords -->
-<link href="css/style_home.css" rel="stylesheet" type="text/css" media="all"/><!--stylesheet-css-->
+<link th:href="@{/css/style_home.css}" rel="stylesheet" type="text/css" media="all"/><!--stylesheet-css-->
 <link href="//fonts.googleapis.com/css?family=Cabin" rel="stylesheet"><!--online-fonts-->
 <link href="//fonts.googleapis.com/css?family=Raleway" rel="stylesheet"><!--online-fonts-->
 
@@ -27,7 +27,6 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 
 	<div class="w3ls-container">
 		<div class="w3l-form">
-			<form action="#" method="post">
 				
 				<span th:unless="${isAdmin}">  
 <h1>HOME PAGE</h1>
@@ -41,12 +40,12 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 <h1>ADMIN HOME PAGE</h1>
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Sign Out"/>
+</form>    
     <p><a th:href="@{/admin/allpendings}"> Pending Posts </a></p>
     <p><a th:href="@{/admin/categories}"> Categories </a></p>
     <p><a th:href="@{/admin/users}"> Users </a></p>
-</form>
+
 </span>
-			</form>
 		</div>
 	</div>
 		<footer>&copy; 2018 CampusRecycle. All Rights Reserved 

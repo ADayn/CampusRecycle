@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
+     
     @Autowired
     public WebSecurityConfig(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
@@ -28,6 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/register").permitAll()
+                .antMatchers("/js/**","/css/**","/js_1/**","/fonts/**","/js_2/**","/js_3/**","/images/**","/video/**","/uploads/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
@@ -36,6 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
             .logout()
                 .logoutUrl("/logout")
+                .clearAuthentication(true)
                 .logoutSuccessUrl("/login")
                 .permitAll();
     }
