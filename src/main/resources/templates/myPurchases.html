@@ -12,6 +12,7 @@
         <th>Image</th>
         <th>Category</th>
         <th>Price</th>
+        <th>Seller</th>
         <th>View</th>
         <th>Rate</th>
     </tr>
@@ -20,6 +21,7 @@
         <td><img th:src="@{'/items/' + ${item.id} + '/image'}" height=80 width=80 alt="no fig"/></td>
         <td th:text="${item.category.name}"></td>
         <td th:text="${#numbers.formatCurrency(item.price)}"></td>
+        <td th:text="${item.seller.username}"> </td>
         <td> <a th:href="@{'/items/detail?id='+${item.id}}">view</a></td>
         <td>
          <span th:if="${item.rated==0}">  

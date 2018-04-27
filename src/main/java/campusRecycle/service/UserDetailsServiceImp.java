@@ -42,7 +42,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
     }
 
     private Optional<? extends Person> getUserDetails(String s) {
-        return  userRepository.findByUsername(s);
+        return  userRepository.findByUsernameAndDeleted(s, false);
 //                .map(u -> org.springframework.security.core.userdetails.User
 //                        .withUsername(s)
 //                        // TODO: Add password encoder
