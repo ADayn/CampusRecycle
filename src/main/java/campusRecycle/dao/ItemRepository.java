@@ -18,5 +18,6 @@ public interface ItemRepository extends CrudRepository<Item, Long> {
 
     List<Item> findAllBySellerAndState(User seller, ItemState state);
 
-    List<Item> findAllByBuyer(User seller);
+    List<Item> findAllByBuyer(User buyer);
+    
 }

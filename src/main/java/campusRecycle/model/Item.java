@@ -16,8 +16,30 @@ public class Item {
     private String title;
 
     private String description;
+    
+    @Column(name="is_rated")
+    private int rated=0; //0 not rated; 1 rated
+    
+    @Column(name="rate_value")
+    private int rateValue=0;
 
-    @Column(columnDefinition = "LONGBLOB")
+    public int getRateValue() {
+		return rateValue;
+	}
+
+	public void setRateValue(int rateValue) {
+		this.rateValue = rateValue;
+	}
+
+	public int getRated() {
+		return rated;
+	}
+
+	public void setRated(int isRated) {
+		this.rated = isRated;
+	}
+
+	@Column(columnDefinition = "LONGBLOB")
     private byte[] image;
 
     @Column(nullable = false)

@@ -32,6 +32,8 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 <h1>HOME PAGE</h1>
 <span th:text="${currentUsername}"></span>
 <a th:href="@{/items/posted}">My Sales</a>
+&nbsp;&nbsp;
+<a th:href="@{/items/purchased}">My purchases</a>
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Sign Out"/>
 </form>

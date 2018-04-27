@@ -28,6 +28,10 @@ public class Inventory {
     public ItemList findListBySellerAndState(User seller, ItemState state) {
         return new ItemList(itemRepository.findAllBySellerAndState(seller, state));
     }
+    
+    public ItemList findListByBuyer(User buyer) {
+    	return new ItemList(itemRepository.findAllByBuyer(buyer));
+    }
 
     public void postItem(Item item) {
         // TODO: Change to pending once admin is implemented
