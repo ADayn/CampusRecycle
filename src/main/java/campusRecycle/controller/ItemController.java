@@ -23,6 +23,8 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -90,7 +92,7 @@ public class ItemController {
         }
     }
 
-    @PostMapping("/{itemId}/uploadImage")
+    @PostMapping("/{itemId}/uploadImage")  
     public String postItem(@PathVariable Long itemId, @RequestParam("file") MultipartFile file, Model model) {
         Item item = inventory.findById(itemId).get();
         try {
@@ -207,6 +209,41 @@ public class ItemController {
     	inventory.update(item);
     	userRepository.save(user);
     	return "redirect:/items/purchased";
+    }
+    
+    @PostMapping("sort")
+    public String sortItemList(@ModelAttribute("category") Category category, 
+    		@RequestParam(value="key") String key,
+    		@RequestParam(value="option") String option, Model model) {
+    	System.out.println("catename:"+category.getName());
+    	ItemList itemList = inventory.findListByStateAndCategory(ItemState.ACTIVE, category);
+    	Comparator<Item> cp;
+    	System.out.println("key:"+key+"; option:"+option);
+    	if(key.equals("price")) {
+    		cp=new ItemPriceComparator();
+    	}else {
+    		cp=new ItemDateComparator();
+    	}
+    	System.out.println("set Comparator");
+    	Pageable<Item> pageable;
+    	if(option.equals("A-Z")) {
+    		System.out.println(itemList.getSorted(cp).get(0).getPrice());
+    		pageable = new ItemList(itemList.getSorted(cp)).getPageable();
+    	}else {
+    		List<Item> reversed=itemList.getSorted(cp);
+    		Collections.reverse(reversed);
+    		System.out.println(reversed.get(0).getPrice());
+    		pageable = new ItemList(reversed).getPageable();
+    	}
+    	int pageNum=0;
+        Page<Item> page = pageable.getPage(pageNum);
+        model.addAttribute("noResults", pageable.isEmpty());
+        model.addAttribute("currentPageNumber", pageNum);
+        model.addAttribute("category", category);
+        model.addAttribute("items", page);
+        model.addAttribute("pageLinks", createPageLinks(pageable, pageNum));
+
+        return "browseCategory";
     }
 
 }

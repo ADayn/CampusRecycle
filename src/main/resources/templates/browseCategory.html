@@ -14,14 +14,42 @@
 			<th>Title</th>
 			<th>Image</th>
 			<th>Category</th>
-			<th>Price</th>
+			<th>Price </th>
+			<th>Posted-Date</th>
+
 			<th>View</th>
+		</tr>
+		<tr>
+		   <th> </th>
+		   <th> </th>
+		   <th> </th>
+		   <th> 
+		     <form th:object="${category}" method="post" th:action="@{/items/sort}"> 
+		       Sort:
+		       <input type="hidden" th:field="*{id}"/>
+		       <input type="hidden" th:field="*{name}"/>
+		       <input type="hidden" name="key" value="price">
+		       <input type="submit" name="option" value="A-Z">
+		       <input type="submit" name="option" value="Z-A">
+		    </form>
+		   </th>
+		   <th>
+		     <form th:object="${category}" method="post" th:action="@{/items/sort}"> 
+		       Sort:
+		       <input type="hidden" th:field="*{id}"/>
+		       <input type="hidden" th:field="*{name}"/>
+		       <input type="hidden" name="key" value="date">
+		       <input type="submit" name="option" value="A-Z">
+		       <input type="submit" name="option" value="Z-A">
+		    </form>
+		   </th>
 		</tr>
 		<tr th:each="item : ${items} ">
 			<td th:text="${item.title}"></td>
 			<td><img th:src="@{'/items/' + ${item.id} + '/image'}"/></td>
 			<td th:text="${item.category.name}"></td>
 			<td th:text="${#numbers.formatCurrency(item.price)}"></td>
+			<td th:text="${item.datePosted}"></td>
 			<td> <a th:href="@{'/items/detail?id='+${item.id}}">view</a></td>
 		</tr>
 	</table>

@@ -8,7 +8,7 @@ public class Pageable<T> {
 
     Iterable<T> collection;
     @Min(1)
-    int itemsPerPage = 10;
+    int itemsPerPage = 5;
     List<List<T>> pages = new ArrayList<>();
 
     public Pageable(Iterable<T> collection) {

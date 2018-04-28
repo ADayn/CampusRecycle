@@ -12,14 +12,8 @@ public class ItemList implements Iterable<Item> {
 		this.items = items;
 	}
 
-	public List<Item> getSorted(SortKey key){
-		Comparator<Item> comparator=new ItemPriceComparator();
+	public List<Item> getSorted(Comparator<Item> comparator){
 		List<Item> sortedItems = new ArrayList<Item>(items);
-		if(key == SortKey.PRICE) {
-			comparator=new ItemPriceComparator();
-		}else if(key==SortKey.DATE) {
-			comparator=new ItemDateComparator();
-		}
 		Collections.sort(sortedItems,comparator);
 		return sortedItems;
 	}
