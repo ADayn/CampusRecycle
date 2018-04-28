@@ -7,17 +7,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">	
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-<title>Login Page</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<meta name="keywords" content="User Login Form Responsive Templates, Iphone Widget Template, Smartphone login forms,Login form, Widget Template, Responsive Templates, a Ipad 404 Templates, Flat Responsive Templates" />
-<link th:href="@{/css/style_login.css}" rel='stylesheet' type='text/css' />
-<!--web-fonts-->
-<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+	<title>Login Page</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<meta name="keywords" content="User Login Form Responsive Templates, Iphone Widget Template, Smartphone login forms,Login form, Widget Template, Responsive Templates, a Ipad 404 Templates, Flat Responsive Templates" />
+	<link th:href="@{/css/style_login.css}" rel='stylesheet' type='text/css' />
+	<!--web-fonts-->
+	<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" th:href="@{/css/default.css}">
-<!--/web-fonts-->
+	<!--/web-fonts-->
 </head>
 <body>
 <!--User-Login-->
@@ -25,27 +25,27 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="avtar" >
 	<img th:src="@{/images/avtar.png}" />
 </div>
-   <div class="login-form">
+<div class="login-form">
 	<div th:if="${param.error}">
-    Invalid username and password.
-</div>
-<div th:if="${param.logout}">
-    You have been logged out.
-</div>
-		<p>New user?<a href="/register">Register here!</a></p>
-			<form th:action="@{/login}" method="post">
-				<div class="form-text">
-					<input type="text" class="text" name="username" value="USERNAME" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'USERNAME';}" >
-					<input type="password" name="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
-				</div>
-					<input type="submit" value="GO" >
-			</form>
+		Invalid username and password.
 	</div>
+	<div th:if="${param.logout}">
+		You have been logged out.
+	</div>
+	<p>New user?<a href="/register">Register here!</a></p>
+	<form th:action="@{/login}" method="post">
+		<div class="form-text">
+			<input type="text" class="text" name="username" value="USERNAME" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'USERNAME';}" >
+			<input type="password" name="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
+		</div>
+		<input type="submit" value="GO" >
+	</form>
+</div>
 <!--/User-Login-->
 <!--start-copyright-->
 <div class="copy-right">
-	<p>2018 CampusRecycle</p> 
+	<p>2018 CampusRecycle</p>
 </div>
-<!--//end-copyright-->	
+<!--//end-copyright-->
 </body>
 </html>
