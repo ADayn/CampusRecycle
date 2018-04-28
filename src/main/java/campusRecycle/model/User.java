@@ -15,7 +15,7 @@ public class User extends Person {
 	public void addRating(Integer rate) {
 		ratings.add(rate);
 	}
-		
+		 
 	public List<Integer> getRatings() {
 		return ratings;
 	}

@@ -185,4 +185,28 @@ public class ItemController {
                 .boxed()
                 .collect(Collectors.toList());
     }
+    
+    @GetMapping("/purchased")
+    public String showMyPurchasedItems(Model model, Principal p) {
+        String username = p.getName();
+        User u = userRepository.findByUsername(username).orElseThrow(ResourceNotFoundException::new);
+        model.addAttribute("boughtItems", inventory.findListByBuyer(u));
+        return "myPurchases";
+    }
+    
+    @PostMapping("/rate")
+    public String ratePurchasedItem(@RequestParam(value="item_id") long item_id, 
+    		      @RequestParam(value="seller_id") long seller_id,
+    		      @RequestParam(value="rate") int rate, Model model) {
+    	Item item=inventory.findById(item_id).get();
+    	System.out.println("itemtitle="+item.getTitle());
+    	item.setRated(1);
+    	item.setRateValue(rate);
+    	User user=userRepository.findById(seller_id).get();
+    	user.addRating(rate);
+    	inventory.update(item);
+    	userRepository.save(user);
+    	return "redirect:/items/purchased";
+    }
+
 }

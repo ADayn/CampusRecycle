@@ -1,13 +1,63 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>My Sales</title>
+
+	<meta charset="utf-8">
+
+	<title>My Sales</title>
+<!--
+Comila Template
+http://www.templatemo.com/tm-490-comila
+-->
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+
+	<!-- stylesheets css -->
+	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+	<link rel="stylesheet" th:href="@{/css/animate.min.css}">
+
+  	<link rel="stylesheet" th:href="@{/css/et-line-font.css}">
+	<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+
+  	<link rel="stylesheet" th:href="@{/css/vegas.min.css}">
+	<link rel="stylesheet" th:href="@{/css/style_sales.css}">
+
+	<link href='https://fonts.googleapis.com/css?family=Rajdhani:400,500,700' rel='stylesheet' type='text/css'>
 
 </head>
 <body>
 
+<!-- preloader section -->
+<section class="preloader">
+	<div class="sk-circle">
+       <div class="sk-circle1 sk-child"></div>
+       <div class="sk-circle2 sk-child"></div>
+       <div class="sk-circle3 sk-child"></div>
+       <div class="sk-circle4 sk-child"></div>
+       <div class="sk-circle5 sk-child"></div>
+       <div class="sk-circle6 sk-child"></div>
+      <div class="sk-circle7 sk-child"></div>
+       <div class="sk-circle8 sk-child"></div>
+       <div class="sk-circle9 sk-child"></div>
+       <div class="sk-circle10 sk-child"></div>
+       <div class="sk-circle11 sk-child"></div>
+       <div class="sk-circle12 sk-child"></div>
+     </div>
+</section>  
 
-TODO
+<!-- home section -->
+<section id="home">
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-offset-2 col-md-8 col-sm-12">
+				<div class="home-thumb">
+				<!-- 	<h1 class="wow fadeInUp" data-wow-delay="0.4s">My Sales</h1>
+          			<h3 class="wow fadeInUp" data-wow-delay="0.6s"> <strong>Active</strong>   </h3>  -->
+          			TODO
 <a th:href="@{/items/post}">post</a>
 <h2>My Sales</h2>
 <h4>Active</h4>
@@ -22,19 +72,23 @@ TODO
     </tr>
     <tr th:each="item : ${activeItems} ">
         <td th:text="${item.title}"></td>
-        <td><img th:src="@{'/items/' + ${item.id} + '/image'}"/></td>
+        <td><img th:src="@{'/items/' + ${item.id} + '/image'}" height=80 width=80 alt="no fig"/></td>
         <td th:text="${item.category.name}"></td>
         <td th:text="${#numbers.formatCurrency(item.price)}"></td>
         <td> <a th:href="@{'/items/detail?id='+${item.id}}">view</a></td>
         <td>
           <form th:action="@{/items/modify}" method="post">
             <input type="hidden" name="item_id" th:value="${item.id}" />
-            <input type="submit" name="option" value="update" th:onclick="|hideBuyerInputs(${item.id})|"/>
-            <input type="submit" name="option" value="delete" th:onclick="|hideBuyerInputs($item.id})|"/>
+            
+            <input type="submit" name="option" value="update" style="color:white;background-color:black" th:onclick="|hideBuyerInputs(${item.id})|"/>
+            
+            <input type="submit" name="option" value="delete" style="color:white;background-color:black" th:onclick="|hideBuyerInputs($item.id})|"/>
+            
             <input type="hidden" name="item_id" th:value="${item.id}" />
-            <input type="button" th:id="${'sold_button_'+item.id}" name="buttom" value="sold" th:onclick="|showBuyerInputs(${item.id})|" />
+            <input type="button" th:id="${'sold_button_'+item.id}" name="buttom" style="color:white;background-color:black" value="sold" th:onclick="|showBuyerInputs(${item.id})|" />
             <input type="text" th:id="${'buyer_input_'+item.id}" style="display:none" name="buyer_email" placeholder="buyer email" /> 
-            <input type="submit" th:id="${'sold_commit_'+item.id}" style="display:none" name="option" value="sold" />
+            
+            <input type="submit" th:id="${'sold_commit_'+item.id}" style="color:white;background-color:black;display:none" name="option" value="sold" />
           </form>
         </td>
     </tr>
@@ -51,15 +105,15 @@ TODO
     </tr>
     <tr th:each="item : ${pendingItems} ">
         <td th:text="${item.title}"></td>
-        <td><img th:src="@{'/items/' + ${item.id} + '/image'}"/></td>
+        <td><img th:src="@{'/items/' + ${item.id} + '/image'}" height=80 width=80 alt="no fig"/></td>
         <td th:text="${item.category.name}"></td>
         <td th:text="${#numbers.formatCurrency(item.price)}"></td>
         <td> <a th:href="@{'/items/detail?id='+${item.id}}">view</a></td>
         <td>
            <form th:action="@{/items/modify}" method="post">
             <input type="hidden" name="item_id" th:value="${item.id}" />
-            <input type="submit" name="option" value="update" />
-            <input type="submit" name="option" value="delete" />
+            <input type="submit" name="option" value="update" style="color:white;background-color:black"/>
+            <input type="submit" name="option" value="delete" style="color:white;background-color:black" />
           </form>
         </td>
     </tr>
@@ -76,14 +130,59 @@ TODO
     </tr>
     <tr th:each="item : ${soldItems} ">
         <td th:text="${item.title}"></td>
-        <td><img th:src="@{'/items/' + ${item.id} + '/image'}"/></td>
+        <td><img th:src="@{'/items/' + ${item.id} + '/image'}" height=80 width=80 alt="no fig"/></td>
         <td th:text="${item.category.name}"></td>
         <td th:text="${#numbers.formatCurrency(item.price)}"></td>
         <td> <a th:href="@{'/items/detail?id='+${item.id}}">view</a></td>
         <td th:text="${item.buyer.email}"> </td>
     </tr>
 </table>
-    <script>
+
+          			</div>
+			</div>
+
+		</div>
+	</div>		
+</section>
+
+<!-- about section -->
+<section id="about">
+	<!-- <div class="container">
+		<div class="row">
+
+      <div class="col-md-6 col-sm-12">
+        <img th:src="@{/images/about-img.png}" class="img-responsive wow fadeInUp" alt="About">
+      </div> -->
+
+			<!-- <div class="col-md-6 col-sm-12">
+				<div class="about-thumb">
+					<div class="section-title">
+						<h1 class="wow fadeIn" data-wow-delay="0.2s">TODO</h1>
+						<h3 class="wow fadeInUp" data-wow-delay="0.4s"><a th:href="@{/items/post}">post</a></h3>
+					</div>
+					
+				</div>
+			</div> -->
+
+		</div>
+	</div>
+</section>
+
+
+
+<!-- Back top -->
+<a href="#back-top" class="go-top"><i class="fa fa-angle-up"></i></a>
+
+<!-- javscript js -->
+<script th:src="@{/js_3/jquery.js}"></script>
+<script th:src="@{/js_3/bootstrap.min.js}"></script>
+
+<script th:src="@{/js_3/vegas.min.js}"></script>
+
+<script th:src="@{/js_3/wow.min.js}"></script>
+<script th:src="@{/js_3/smoothscroll.js}"></script>
+<script th:src="@{/js_3/custom.js}"></script>
+<script>
       function showBuyerInputs(item_id){
       	  document.getElementById("sold_button_"+item_id).style.display="none";
       	  document.getElementById("buyer_input_"+item_id).style.display="inline";
@@ -99,5 +198,6 @@ TODO
       }
       
     </script>
+
 </body>
 </html>

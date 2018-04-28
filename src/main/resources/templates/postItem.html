@@ -34,11 +34,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				    <input type="hidden" th:field="*{id}"/>
 					<span>Title</span>
 					<span th:if="${#fields.hasErrors('title')}">Title Required</span>
-						<input type="text" th:field="*{title}" placeholder="Title" required / class="title" value="Eg: Apple" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Eg: Apple';}" />
+						<input type="text" th:field="*{title}" placeholder="Title" required / class="title" >
 				</div>
 				<div>
 					<span>Description</span>
-						<input type="text" class="describe" th:field="*{description}" placeholder="Description" / value="Eg: The one in the Bahamas" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Eg: The one in the Bahamas';}" />
+						<input type="text" class="describe" th:field="*{description}" placeholder="Description" />
 				</div>
 				<div>
 					<span th:if="${#fields.hasErrors('price')}">Price Required</span>

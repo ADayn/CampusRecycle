@@ -33,6 +33,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<span th:text="${currentUsername}"></span>
 			<a th:href="@{/categories/browse}">Browse Categories</a>
 			<a th:href="@{/items/posted}">My Sales</a>
+			<a th:href="@{/items/purchased}">My Purchases</a>
 			<form th:action="@{/logout}" method="post">
     			<input type="submit" value="Sign Out"/>
 			</form>
