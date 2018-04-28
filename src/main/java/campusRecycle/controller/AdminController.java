@@ -49,9 +49,9 @@ public class AdminController {
 	//not used, because we don't want categories to be deleted
 	@DeleteMapping("/categories")
 	public String deleteCategory(@RequestParam("cat_id") long cat_id) {
-		if(categoryRepository.findById(cat_id).isPresent()) {
-			categoryRepository.delete(categoryRepository.findById(cat_id).get());
-		}
+        categoryRepository
+                .findById(cat_id)
+                .ifPresent(categoryRepository::delete);
 		return "redirect:/admin/categories";
 	}
 
@@ -72,11 +72,9 @@ public class AdminController {
 	@PostMapping("/users")
 	public String processUser(@RequestParam("user_id") long user_id,
 			@RequestParam("option") String option) {
-		if(option.equals("delete")) {
-			if(userRepository.findById(user_id).isPresent()){
-				userRepository.delete(userRepository.findById(user_id).get());
-			}
-		}
+        userRepository
+                .findById(user_id)
+                .ifPresent(userRepository::delete);
 		return "redirect:/admin/users";
 	}
 

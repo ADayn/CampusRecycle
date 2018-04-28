@@ -1,5 +1,6 @@
 package campusRecycle.controller;
 
+import campusRecycle.dao.CategoryRepository;
 import campusRecycle.dao.UserRepository;
 import campusRecycle.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +12,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class MainController {
     private UserRepository userRepository;
+    private CategoryRepository categoryRepository;
 
     @Autowired
-    public MainController(UserRepository userRepository) {
+    public MainController(UserRepository userRepository, CategoryRepository categoryRepository) {
         this.userRepository = userRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     @GetMapping("/home")
     public String showRegistrationPage(Model model) {
+        model.addAttribute("categories", categoryRepository.findAll());
         return "home";
     }
 

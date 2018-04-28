@@ -5,6 +5,8 @@ import campusRecycle.dao.UserRepository;
 import campusRecycle.model.*;
 import campusRecycle.service.Inventory;
 import campusRecycle.responses.ResourceNotFoundException;
+import campusRecycle.util.Page;
+import campusRecycle.util.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,9 +22,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static java.lang.Math.min;
+import static java.lang.Math.max;
 
 @Controller
 @RequestMapping("/items")
@@ -30,7 +38,8 @@ public class ItemController {
     private UserRepository userRepository;
     private Inventory inventory;
     private CategoryRepository categoryRepository;
-//    private HttpServletRequest request;
+
+//    private List<Integer> calculatePages(Integer page, Integer maxPages)
 
     @Autowired
     public ItemController(UserRepository userRepository, Inventory inventory, CategoryRepository categoryRepository, HttpServletRequest request) {
@@ -110,7 +119,7 @@ public class ItemController {
     
     @GetMapping("/detail") // detail?id=
     public String showItemDetail(@RequestParam(value="id") long id, Model model) {
-    	Item item=inventory.findById(id).get();
+    	Item item=inventory.findById(id).orElseThrow(ResourceNotFoundException::new);
     	model.addAttribute("item", item);
     	return "itemDetail";
     }
@@ -121,7 +130,7 @@ public class ItemController {
     		      @RequestParam(value="option") String option, Model model) {
     	System.out.println(id);
     	System.out.println(buyer_email);
-    	Item item=inventory.findById(id).get();
+    	Item item=inventory.findById(id).orElseThrow(ResourceNotFoundException::new);
     	System.out.println(item.getDescription());
     	if (option.equals("update")) {
     		model.addAttribute(item);
@@ -142,5 +151,38 @@ public class ItemController {
     	}
     	
     }
-        
+
+    @GetMapping("/findByCategory")
+    public String findByCategory(Model model,
+                                 @RequestParam Long id,
+                                 @RequestParam(required = false, defaultValue = "0") Integer pageNumber) {
+
+        Category category = categoryRepository
+                .findById(id)
+                .orElseThrow(ResourceNotFoundException::new);
+        Pageable<Item> pageable = inventory
+                .findListByStateAndCategory(ItemState.ACTIVE, category)
+                .getPageable();
+        Page<Item> page = pageable.getPage(pageNumber);
+
+        model.addAttribute("noResults", pageable.isEmpty());
+        model.addAttribute("currentPageNumber", pageNumber);
+        model.addAttribute("category", category);
+        model.addAttribute("items", page);
+        model.addAttribute("pageLinks", createPageLinks(pageable, pageNumber));
+
+        return "browseCategory";
+    }
+
+    private List<Integer> createPageLinks(Pageable<Item> pageable, int currentPageNumber) {
+        int linksToShow = 10;
+        int numPages = pageable.getNumPages();
+        List<Integer> pageLinks = new ArrayList<>(linksToShow);
+        int minLink = max(0, min(numPages - linksToShow, currentPageNumber - ((linksToShow + 1) / 2)));
+        int maxLink = min(numPages, max(currentPageNumber + (linksToShow / 2), linksToShow));
+        return IntStream
+                .range(minLink, maxLink)
+                .boxed()
+                .collect(Collectors.toList());
+    }
 }

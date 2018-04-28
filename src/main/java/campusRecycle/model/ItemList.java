@@ -1,4 +1,7 @@
 package campusRecycle.model;
+
+import campusRecycle.util.Pageable;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -77,5 +80,9 @@ public class ItemList implements Iterable<Item> {
 	@Override
 	public Iterator<Item> iterator() {
 		return items.iterator();
+	}
+
+	public Pageable<Item> getPageable() {
+		return new Pageable<>(items);
 	}
 }

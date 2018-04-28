@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html lang="en-US" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Categories</title>
+</head>
+<body>
+<h2>Browse by Category</h2>
+<div th:each="category : ${categories}">
+	<a th:href="'/items/findByCategory?id=' + ${category.id} + '&pageNumber=0'" th:text="${category.name}"></a>
+</div>
+</body>
+</html>
