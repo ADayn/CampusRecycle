@@ -88,8 +88,7 @@ http://www.templatemo.com/tm-490-comila
             
             <input type="hidden" name="item_id" th:value="${item.id}" />
             <input type="button" th:id="${'sold_button_'+item.id}" name="buttom" style="color:white;background-color:black" value="sold" th:onclick="|showBuyerInputs(${item.id})|" />
-            <input type="text" th:id="${'buyer_input_'+item.id}" style="display:none" name="buyer_email" placeholder="buyer email" /> 
-            
+            <input type="text" th:id="${'buyer_input_'+item.id}" style="display:none;color:black" name="buyer_email" placeholder="buyer email" /> 
             <input type="submit" th:id="${'sold_commit_'+item.id}" style="color:white;background-color:black;display:none" name="option" value="sold" />
           </form>
         </td>
