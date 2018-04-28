@@ -30,6 +30,7 @@ public class MainController {
     public String showRegistrationPage(Model model, User user) {
         model.addAttribute("user", user);
         model.addAttribute("emailUsed", false);
+        model.addAttribute("emailWrong", false);
         return "register";
     }
 
@@ -41,6 +42,9 @@ public class MainController {
         } else if (userRepository.findByUsername(user.getUsername()).isPresent()) {
             model.addAttribute("usernameUsed", true);
             return "register";
+        } else if(!user.getEmail().endsWith("@colorado.edu")) {
+        	model.addAttribute("emailWrong", true);
+        	return "register";
         } else {
             userRepository.save(user);
             // TODO: Send email

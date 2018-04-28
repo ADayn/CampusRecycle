@@ -53,6 +53,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 				
 				<div class="w3l-email">
 					<span><i class="fa fa-envelope-o w3l-3" aria-hidden="true"></i></span>
+					<span th:if="${emailWrong}">Please use @colorado.edu</span>
 					<span th:if="${emailUsed}">Email taken</span>
 					<input type="email" name="e-mail" th:field="*{email}" placeholder="Email Address" required />
 					<div class="clear"></div>
