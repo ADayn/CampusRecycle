@@ -20,4 +20,6 @@ public interface ItemRepository extends CrudRepository<Item, Long> {
 
     List<Item> findAllByBuyer(User buyer);
     
+    List<Item> findAllBySeller(User seller);
+    
 }

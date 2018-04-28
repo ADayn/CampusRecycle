@@ -1,0 +1,88 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+<title>Post Item</title>
+<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+<!-- Custom Theme files -->
+<link href="css/style_post.css" rel="stylesheet" type="text/css" media="all" />
+<!-- Custom Theme files -->
+<script src="js_1/jquery.min.js"></script>
+<!-- Custom Theme files -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="File Upload Widget Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+</head>
+<body>
+
+<h1>Post Item</h1>
+
+<div class="upload">
+		<div class="login-form">
+			<form th:action="@{/items/post}" th:object="${item}" method="post">
+				<div>
+					<span>Title</span>
+					<span th:if="${#fields.hasErrors('title')}">Title Required</span>
+						<input type="text" th:field="*{title}" placeholder="Title" required / class="title" value="Eg: Apple" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Eg: Apple';}" />
+				</div>
+				<div>
+					<span>Description</span>
+						<input type="text" class="describe" th:field="*{description}" placeholder="Description" / value="Eg: The one in the Bahamas" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Eg: The one in the Bahamas';}" />
+				</div>
+				<div>
+					<span th:if="${#fields.hasErrors('price')}">Price Required</span>
+    				<input type="number" th:field="*{price}" placeholder="Price" required />
+    				<select th:field="*{category}" title="Category">
+        			<option th:each="cat : ${categories}"
+               				 th:value="${cat.id}"
+                			th:text="${cat.name}"></option>
+    				</select>
+				</div>
+			</form>
+
+			<form id="upload" method="post" action="postItem.php" enctype="multipart/form-data">
+				<div id="drop">
+				<a>Post</a>
+				<input type="file" name="upl" multiple />
+			</div>
+
+				
+				<ul>
+				<!-- The file uploads will be shown here -->
+				</ul>
+
+			</form>
+		</div>
+			
+	<!-- JavaScript Includes -->
+		<script src="js_1/jquery.knob.js"></script>
+	<!-- JavaScript Includes -->
+
+	<!-- jQuery File Upload Dependencies -->
+		<script src="js_1/jquery.ui.widget.js"></script>
+		<script src="js_1/jquery.iframe-transport.js"></script>
+		<script src="js_1/jquery.fileupload.js"></script>
+	<!-- jQuery File Upload Dependencies -->
+		
+	<!-- Main JavaScript file -->
+		<script src="js_1/script.js"></script>
+	<!-- Main JavaScript file -->
+	
+</div>
+
+<div class="footer">
+     <p>Copyright &copy; 2018 CampusRecycle. All Rights Reserved </p>
+</div>
+	
+</body>
+</html>

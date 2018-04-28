@@ -19,6 +19,7 @@ import campusRecycle.model.ItemList;
 import campusRecycle.model.ItemState;
 import campusRecycle.model.User;
 import campusRecycle.service.Inventory;
+import java.util.*;  
 
 @Controller
 @RequestMapping("admin")
@@ -64,7 +65,7 @@ public class AdminController {
 
 	@GetMapping("/users")
 	public String showUserList(Model model) {
-		Iterable<User> users=userRepository.findAll();
+		List<User> users=userRepository.findAllByDeleted(false);
 		model.addAttribute("userList", users.iterator());
 		return "editUsers";
 	}
@@ -72,9 +73,23 @@ public class AdminController {
 	@PostMapping("/users")
 	public String processUser(@RequestParam("user_id") long user_id,
 			@RequestParam("option") String option) {
-        userRepository
-                .findById(user_id)
-                .ifPresent(userRepository::delete);
+		if(option.equals("delete")) {
+			if(userRepository.findById(user_id).isPresent()){
+				//deny all active/pending items 
+				User s=userRepository.findById(user_id).get();
+				ItemList itemList=inventory.findListBySellerAndState(s, ItemState.PENDING);
+				for(Item item: itemList) {
+					item.setState(ItemState.DENIED);
+				}
+				itemList=inventory.findListBySellerAndState(s, ItemState.ACTIVE);
+				for(Item item: itemList) {
+					item.setState(ItemState.DENIED);
+				}
+				//mark the use deleted
+				s.setDeleted(true);
+				userRepository.save(s);
+			}
+		}
 		return "redirect:/admin/users";
 	}
 

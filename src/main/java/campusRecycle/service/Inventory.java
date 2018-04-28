@@ -29,6 +29,10 @@ public class Inventory {
         return new ItemList(itemRepository.findAllBySellerAndState(seller, state));
     }
     
+    public ItemList findListBySeller(User seller) {
+    	return new ItemList(itemRepository.findAllBySeller(seller));
+    }
+    
     public ItemList findListByBuyer(User buyer) {
     	return new ItemList(itemRepository.findAllByBuyer(buyer));
     }
