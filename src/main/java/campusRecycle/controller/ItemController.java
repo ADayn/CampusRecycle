@@ -211,7 +211,7 @@ public class ItemController {
     	return "redirect:/items/purchased";
     }
     
-    @PostMapping("sort")
+    @PostMapping("/sort")
     public String sortItemList(@ModelAttribute("category") Category category, 
     		@RequestParam(value="key") String key,
     		@RequestParam(value="option") String option, Model model) {
