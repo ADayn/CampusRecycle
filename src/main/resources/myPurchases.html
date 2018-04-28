@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>My Purchases</title>
+    <link rel="stylesheet" th:href="@{/css/default.css}">
+</head>
+<body>
+<h2>My Purchases</h4>
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Image</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Seller</th>
+        <th>View</th>
+        <th>Rate</th>
+    </tr>
+    <tr th:each="item : ${boughtItems} ">
+        <td th:text="${item.title}"></td>
+        <td><img th:src="@{'/items/' + ${item.id} + '/image'}" height=80 width=80 alt="no fig"/></td>
+        <td th:text="${item.category.name}"></td>
+        <td th:text="${#numbers.formatCurrency(item.price)}"></td>
+        <td th:text="${item.seller.username}"> </td>
+        <td> <a th:href="@{'/items/detail?id='+${item.id}}">view</a></td>
+        <td>
+         <span th:if="${item.rated==0}">  
+          <form th:action="@{/items/rate}" method="post">
+            <input type="hidden" name="item_id" th:value="${item.id}" />
+            <input type="hidden" name="seller_id" th:value="${item.seller.id}" />
+            <input type="number" name="rate" min="1" max="5" required />
+            <input type="submit" />
+          </form>
+          </span>  
+          <span th:if="${item.rated==1}">
+            <input type="number" name="rate" th:value="${item.rateValue}" disabled/>
+          </span>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
