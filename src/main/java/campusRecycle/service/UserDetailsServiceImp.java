@@ -37,18 +37,10 @@ public class UserDetailsServiceImp implements UserDetailsService {
 
 
     private Optional<? extends Person> getAdminDetails(String s) {
-        // TODO
     	return adminRepository.findByUsername(s);
     }
 
     private Optional<? extends Person> getUserDetails(String s) {
         return  userRepository.findByUsernameAndDeleted(s, false);
-//                .map(u -> org.springframework.security.core.userdetails.User
-//                        .withUsername(s)
-//                        // TODO: Add password encoder
-//                        .password("{noop}" + u.getPassword())
-//                        .roles("USER")
-//                        .build()
-//                );
     }
 }
